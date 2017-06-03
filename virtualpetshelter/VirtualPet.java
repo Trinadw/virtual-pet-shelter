@@ -1,13 +1,18 @@
 package virtualpetshelter;
 import java.util.Random;
 
-public class VirtualPet {
+public class VirtualPet {//this is for the individual pets
 	Random num = new Random ();
 	String name;
-	//starting variables for my pet
-	int hunger = 37;
-	int thirst = 34;
-	int energy = 49;
+	//variables for my pet
+	int hunger;
+	int thirst;
+	int boredom;
+	String description;
+	
+	
+	
+	
 	
 	//holds the pest hunger level
 	int getHunger()  {
@@ -28,26 +33,27 @@ public class VirtualPet {
 	}
 // holds energy level
 	int getEnergy() {
-		return energy;
+		return boredom;
 	}
 // used to determine Jax behavior
 	boolean isTired() {
-		return energy <= 30;
+		return boredom <= 30;
 	}
 // user chooses to feed Jax
 	void feed() {
 		hunger = hunger - 10;
 		thirst = thirst + 10;
-		energy = energy - 8;
+		boredom = boredom - 8;
+		
 	}
 //user chooses to water Jax
 	void water() {
 		thirst = thirst - 10;
-		energy = energy - 7;
+		boredom = boredom - 7;
 	}
 // user puts Jax to bed
 	void bed() {
-		energy = energy + 10;
+		boredom = boredom + 10;
 		hunger = hunger + 10;
 		thirst = thirst + 10;
 	}
@@ -55,7 +61,7 @@ public class VirtualPet {
 	void tick() {
 		hunger = hunger + num.nextInt(11);
 		thirst = thirst + num.nextInt(7);
-		energy = energy - num.nextInt(10);
+		boredom = boredom - num.nextInt(10);
 
 	}
 // Jax self actions
@@ -69,7 +75,46 @@ public class VirtualPet {
 		
 	}
 	void actOut(){
-		energy = energy - 5;
+		boredom = boredom - 5;
 	}
+public VirtualPet(String nameParam, int hungerParam, int thirstParam, int boredomParam, String descriptionParam){
+	name=nameParam;
+	hunger=hungerParam;
+	thirst = thirstParam;
+	boredom=boredomParam;
+	description=descriptionParam;
+	
+	
+}
+public VirtualPet(String nameParams, String descriptionParams){
+name=nameParams;
+description=descriptionParams;
 
 }
+
+public int feedpet(){
+hunger = hunger -10;
+return hunger;
+}
+
+public int waterpet(){
+	thirst = thirst -10;
+	return thirst;
+}
+public void boredomPet(){
+	boredom=boredom-5;
+	
+}
+	public String pet(){
+		return name+description;
+		
+	}
+
+
+@Override
+public String toString(){
+	return "\n" +name + "\t"+ hunger + "\t"+ thirst + "\t" + boredom;}
+	
+}
+
+

@@ -75,10 +75,14 @@ public class VirtualPetShelterApp {
 			case 6:
 				writeLine("Wish you could stay longer. Enjoy your day.");
 				System.exit(0);//allows the user to end the game
+				default:
+					writeLine("That is not a valid entry");
+					continue;
 			}
 			petShelter.tickShelter();//adjust all care levels in the shelter
 			System.out.println(petShelter.petMap);//prints shelter map
 		}
+		input.close();
 
 	}
 

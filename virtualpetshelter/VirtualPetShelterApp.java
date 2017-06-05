@@ -10,7 +10,7 @@ public class VirtualPetShelterApp {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		VirtualPetShelter everyPet = new VirtualPetShelter();
+		VirtualPetShelter shelterPets = new VirtualPetShelter();
 
 		// pet name, levels and description
 		VirtualPet albie = new VirtualPet("Albie", 46, 56, 77, "happy");
@@ -19,69 +19,81 @@ public class VirtualPetShelterApp {
 		VirtualPet gonzo = new VirtualPet("Gonzo", 55, 47, 78, "aggressive");
 		// parameters for name and description to be used when adopting and
 		// playing
-		VirtualPet paramsAlbie = new VirtualPet("Albie", "happy");
-		VirtualPet paramsLewis = new VirtualPet("Lewis", "nervous");
-		VirtualPet paramsJax = new VirtualPet("Jax", "shy");
-		VirtualPet paramsGonzo = new VirtualPet("Gonzo", "aggressive");
+		//VirtualPet paramsAlbie = new VirtualPet("Albie", "happy");
+		//VirtualPet paramsLewis = new VirtualPet("Lewis", "nervous");
+		//VirtualPet paramsJax = new VirtualPet("Jax", "shy");
+		//VirtualPet paramsGonzo = new VirtualPet("Gonzo", "aggressive");
 
 		// map intake of pets
-		everyPet.intakePets("Albie", albie);
-		everyPet.intakePets("Lewis", lewis);
-		everyPet.intakePets("Jax", jax);
-		everyPet.intakePets("Gonzo", gonzo);
-
+		shelterPets.intakePets("Albie", albie);
+		shelterPets.intakePets("Lewis", lewis);
+		shelterPets.intakePets("Jax", jax);
+		shelterPets.intakePets("Gonzo", gonzo);
+		System.out.println(shelterPets.pets);
 		writeLine(
 				"Welcome to John's Virtual Pet Shelter. This is the status of our pets: \nName \tHunger \tThirst \tBoredom"
-						+ albie + lewis + jax + gonzo + "\nWhat would you like to do next?");
-do {
-		writeLine(
-				"1. Feed the pets \n2. Water the pets \n3. Play with a pet \n4. Adopt a pet \n5. Admit a pet \n6. Quit");
-		int toDo = input.nextInt();
-		switch (toDo) {
-		case 1:
-			everyPet.feedPets();
-			writeLine("The pets appreciate the grub!");
-			break;
-		case 2:
-			everyPet.waterPets();
-			writeLine("The pets were parched, thanks!");
-			break;
-		case 3://play with
-			writeLine("Which pet would you like to play with?");
-			for(VirtualPet somePet : everyPet.pets() ) {
-			writeLine(somePet.name + " is "+somePet.description);
-		}
-			String playPet = input.next();
-			VirtualPet p=everyPet.getPets(playPet);
-			everyPet.playWith(p);
-			String petPlay = input.nextLine();
-			writeLine("Needs work play with");
-					
-			break;
-		case 4:
-			
-			writeLine("Which pet would you like to adopt?\n " + paramsAlbie + "\n" + paramsLewis + "\n" + paramsJax
-					+ "\n" + paramsGonzo);//do this with an enhanced for loop to print the name and description.
-			
-			String myPet = input.nextLine();
-			VirtualPet x=everyPet.getPets(myPet);
-			everyPet.adoptPets(x);
-			break;
-			case 5:
-	writeLine("Please provide us with the pet's name:");
-		 String getPetName = input.next();
-		 writeLine("Please provide the pets description (nervous, sad, jumpy, playful).");
-		 
-		 String getPetDesc= input.next();
-		 everyPet.getPets(getPetDesc);// admit a pet.
-		 break;
-		case 6:
-			writeLine("Goodbye!");
-			System.exit(0);
-			
-				}}
-		while(4<7);	
-	
+						+ albie + lewis + jax + gonzo + ".");
+		boolean begin=false;
+	while(!begin){
+			writeLine(
+					"What would you like to do next? \n1. Feed the pets \n2. Water the pets \n3. Play with a pet \n4. Adopt a pet \n5. Admit a pet \n6. Quit");
+			int toDo = input.nextInt();
+			input.nextLine();
+			switch (toDo) {
+			case 1:
+				shelterPets.feedPets();
+				writeLine("The pets appreciate the grub!");
+				break;
+			case 2:
+				shelterPets.waterPets();
+				writeLine("The pets were parched, thanks!");
+				break;
+			case 3:// play with a pet
+				writeLine("Which pet would you like to play with?");
+				for (VirtualPet somePet : shelterPets.pets()) {
+					writeLine(somePet.name + " is " + somePet.description);
+				}
+				String playPet = input.nextLine();
+				VirtualPet p = shelterPets.getPets(playPet);
+				shelterPets.playWith(p);
+				writeLine(playPet.toLowerCase() + " loves to play!");
+				break;
+			case 4:// adopt a pet
+
+				writeLine("Which pet would you like to adopt?");
+				for (VirtualPet petAdopt : shelterPets.pets()) {
+					writeLine(petAdopt.name + " is " + petAdopt.description);
+				}
+				String outPet = input.nextLine();
+				VirtualPet x = shelterPets.getPets(outPet);
+				shelterPets.adoptPets(x);
+				writeLine("Thank you for adopting " + x + ".");
+
+				// System.out.println(shelterPets.listPets);
+				break;
+			case 5:// admit a pet
+				writeLine("Please provide us with the pet's name:");
+				String getPetName = input.nextLine().toLowerCase();
+				writeLine("Please provide the pets description (nervous, sad, jumpy, playful).");
+				String getPetDesc = input.nextLine().toLowerCase();
+				shelterPets.getPets(getPetDesc);// admit a pet.
+				VirtualPet admitPets = new VirtualPet(getPetName, getPetDesc);
+				shelterPets.intake(admitPets);
+				// System.out.println(shelterPets.listPets.entrySet);
+				break;
+			case 6:
+				writeLine("Goodbye!");
+				System.exit(0);
+				break;
+			default:
+				writeLine("This is not a valid entry.");
+				continue;
+
+			}
+			shelterPets.tickShelterPets();
+			System.out.println(shelterPets.pets);
+
+		} 
 
 	}
 

@@ -1,7 +1,8 @@
 package virtualpetshelter;
+
 import java.util.Random;
 
-public class VirtualPet {//this is for the individual pets
+public class VirtualPet {// this is for the individual pets
 	Random num = new Random();
 	String name;
 	// variables for my pet
@@ -41,19 +42,19 @@ public class VirtualPet {//this is for the individual pets
 		boredom += num.nextInt(5);
 	}
 
-	//public int feedpet(){
-		//hunger = hunger -10;
-		//return hunger;
-	//	}
+	// public int feedpet(){
+	// hunger = hunger -10;
+	// return hunger;
+	// }
 
-		//public int waterpet(){
-			//thirst = thirst -10;
-			//return thirst;
-	//	}
-		//public void boredomPet(){
-		//	boredom=boredom-5;
-		//}
-	
+	// public int waterpet(){
+	// thirst = thirst -10;
+	// return thirst;
+	// }
+	// public void boredomPet(){
+	// boredom=boredom-5;
+	// }
+
 	public VirtualPet(String nameParam, int hungerParam, int thirstParam, int boredomParam, String descriptionParam) {
 		name = nameParam;
 		hunger = hungerParam;
